@@ -35,4 +35,4 @@ def update_cart(request, item_id):
         item.save()
     else:
         item.delete()
-    return redirect('cart')
+    return redirect('cart')# Cart App
