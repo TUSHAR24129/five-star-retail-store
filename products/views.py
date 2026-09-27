@@ -17,3 +17,4 @@ def product_list(request):
         'categories': categories,
         'query':      query,
     })# Products App
+# Search
