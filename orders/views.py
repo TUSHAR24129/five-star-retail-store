@@ -63,4 +63,4 @@ def order_detail(request, order_id):
         order = Order.objects.get(id=order_id, user=request.user)
     except Order.DoesNotExist:
         return redirect('order_list')
-    return render(request, 'orders/order_detail.html', {'order': order})
+    return render(request, 'orders/order_detail.html', {'order': order})# Orders App
