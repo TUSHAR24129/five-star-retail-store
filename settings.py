@@ -1,0 +1,11 @@
+__pycache__/
+*.py[cod]
+venv/
+retailenv/
+*.log
+local_settings.py
+db.sqlite3
+media/
+.env
+.DS_Store
+.vscode/

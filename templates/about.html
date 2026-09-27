@@ -1,0 +1,58 @@
+{% extends 'base.html' %}
+{% block title %}About Us | Retail Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+<h1>About Our Store</h1>
+<p>Learn who we are, what we stand for, and the people behind the shop.</p>
+</section>
+
+<div class="container py-5">
+
+<div class="card shadow p-4 mb-4">
+<h2 style="border-left:4px solid #2563eb;padding-left:14px;">Who We Are</h2>
+<p>Welcome to <strong>FIVE-STAR Retail Store</strong> — your trusted destination
+for quality products at affordable prices.</p>
+</div>
+
+<div class="card shadow p-4 mb-4">
+<h2 style="border-left:4px solid #2563eb;padding-left:14px;">Our Mission</h2>
+<p>Provide high-quality products that bring value to your everyday life.
+We carefully select every item to ensure durability, style, and affordability.</p>
+</div>
+
+<div class="card shadow p-4 mb-4">
+<h2 style="border-left:4px solid #2563eb;padding-left:14px;">Why Shop With Us</h2>
+<div class="row mt-2">
+<div class="col-md-6">
+<div class="p-3 mb-2 bg-light rounded">🛍️ Wide range of quality products</div>
+<div class="p-3 mb-2 bg-light rounded">💰 Affordable, competitive pricing</div>
+</div>
+<div class="col-md-6">
+<div class="p-3 mb-2 bg-light rounded">🚚 Fast & reliable delivery</div>
+<div class="p-3 mb-2 bg-light rounded">💬 Friendly customer support</div>
+</div>
+</div>
+</div>
+
+<div class="card shadow p-4 mb-4">
+<h2 style="border-left:4px solid #2563eb;padding-left:14px;">Meet the Team</h2>
+<div class="row g-4 mt-1">
+{% for member in team %}
+<div class="col-6 col-md-4 col-lg-2">
+<div class="text-center p-3 border rounded">
+<div class="rounded-circle text-white fw-bold d-flex align-items-center
+            justify-content-center mx-auto mb-2"
+     style="width:60px;height:60px;background:{{ member.color }};">
+{{ member.initial }}
+</div>
+<h6>{{ member.name }}</h6>
+<small class="text-muted">{{ member.role }}</small>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+
+</div>
+{% endblock %}

@@ -1,0 +1,61 @@
+/* Product Card Styling */
+.product-card {
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.12) !important;
+}
+
+.product-image {
+  height: 220px;
+  width: 100%;
+  object-fit: contain;
+  background: #f8f9fa;
+  padding: 12px;
+}
+
+.product-image-placeholder {
+  height: 220px;
+  background: #f1f3f5;
+}
+
+.product-name {
+  text-transform: capitalize;
+  font-weight: 700;
+}
+
+.product-category {
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  color: #888;
+}
+
+.stock-badge {
+  background: #e8f5e9;
+  color: #2e7d32;
+  font-weight: 600;
+  padding: 6px 14px;
+  border-radius: 20px;
+}
+
+.stock-badge.low-stock {
+  background: #fff3e0;
+  color: #e65100;
+}
+
+.add-to-cart-btn {
+  transition: background 0.15s ease, transform 0.1s ease;
+}
+
+.add-to-cart-btn:hover {
+  transform: scale(1.02);
+}
+
+.navbar-user-pill {
+  color: #93c5fd;
+  font-weight: 600;
+  font-size: 0.9rem;
+}

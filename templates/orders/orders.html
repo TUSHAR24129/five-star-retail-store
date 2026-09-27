@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+{% block title %}My Orders | Retail Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+<h1>📦 My Orders</h1>
+<p>Track your order history</p>
+</section>
+
+<div class="container py-5">
+{% if orders %}
+{% for order in orders %}
+<div class="card shadow p-4 mb-4">
+<div class="d-flex justify-content-between align-items-center">
+<h5 class="mb-0">Order #{{ order.id }}</h5>
+<span class="badge bg-success fs-6">{{ order.status|title }}</span>
+</div>
+<hr>
+<p><strong>Date:</strong> {{ order.created_at|date:"d M Y" }}</p>
+<p><strong>Items:</strong> {{ order.items.count }}</p>
+<p><strong>Total:</strong> <span class="text-success fw-bold">${{ order.total }}</span></p>
+<a href="/orders/{{ order.id }}/" class="btn btn-primary">View Details</a>
+</div>
+{% endfor %}
+{% else %}
+<div class="text-center py-5">
+<h4 class="text-muted">No orders yet!</h4>
+<a href="/products/" class="btn btn-primary mt-3">Start Shopping</a>
+</div>
+{% endif %}
+</div>
+{% endblock %}

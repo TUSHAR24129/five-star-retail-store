@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% block title %}Order #{{ order.id }} | Retail Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+<h1>Order #{{ order.id }}</h1>
+<p>{{ order.created_at|date:"d M Y H:i" }}</p>
+</section>
+
+<div class="container py-5">
+<div class="row g-4">
+
+  <div class="col-md-8">
+    <!-- Items -->
+    <div class="card shadow p-4 mb-4">
+      <h5 class="mb-3">🛍️ Items Ordered</h5>
+      <table class="table table-bordered">
+      <thead class="table-dark">
+      <tr><th>Product</th><th>Qty</th><th>Price</th><th>Subtotal</th></tr>
+      </thead>
+      <tbody>
+      {% for item in order.items.all %}
+      <tr>
+        <td>{{ item.product.name }}</td>
+        <td>{{ item.quantity }}</td>
+        <td>${{ item.price }}</td>
+        <td>${{ item.subtotal }}</td>
+      </tr>
+      {% endfor %}
+      </tbody>
+      </table>
+      <h5 class="text-end">Total: <span class="text-success">${{ order.total }}</span></h5>
+    </div>
+
+    <!-- Delivery Address -->
+    <div class="card shadow p-4 mb-4">
+      <h5 class="mb-3">📍 Delivery Address</h5>
+      <p><strong>Name:</strong> {{ order.full_name }}</p>
+      <p><strong>Phone:</strong> {{ order.phone }}</p>
+      <p><strong>Address:</strong> {{ order.address }}</p>
+      <p><strong>City:</strong> {{ order.city }}, {{ order.state }} {{ order.zip_code }}</p>
+    </div>
+  </div>
+
+  <div class="col-md-4">
+    <!-- Order Status -->
+    <div class="card shadow p-4 mb-4">
+      <h5 class="mb-3">📦 Order Status</h5>
+      <span class="badge bg-success fs-6 p-2">{{ order.status|title }}</span>
+      <hr>
+      <p><strong>Payment:</strong>
+        {{ order.payment_method|upper }}
+        — <span class="text-{% if order.payment_status == 'paid' %}success{% else %}warning{% endif %}">
+          {{ order.payment_status|title }}
+        </span>
+      </p>
+    </div>
+
+    <a href="/orders/" class="btn btn-outline-dark w-100">← Back to Orders</a>
+  </div>
+
+</div>
+</div>
+{% endblock %}

@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Home | FIVE-STAR Retail Shop{% endblock %}
+
+{% block extra_css %}
+<style>
+.hero {
+    background: linear-gradient(rgba(0,0,0,.6),rgba(0,0,0,.6)),
+    url('{% static "images/image1.jpg" %}');
+    background-size:cover;
+    background-position:center;
+    min-height:90vh;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    text-align:center;
+    color:white;
+}
+.hero h1 { font-size:60px; font-weight:bold; }
+.product-card { transition:0.3s; }
+.product-card:hover { transform:translateY(-8px); }
+</style>
+{% endblock %}
+
+{% block content %}
+<section class="hero">
+<div>
+<h1>Welcome to FIVE-STAR Retail Store</h1>
+<p class="lead fs-4 mt-3">Shop Quality Groceries with us.</p>
+<a href="/products/" class="btn btn-primary btn-lg mt-4">
+Start Shopping
+</a>
+</div>
+</section>
+
+<div class="container py-5">
+<h2 class="text-center mb-5">Featured Products</h2>
+<div class="row g-4">
+{% for product in featured_products %}
+<div class="col-md-3">
+<div class="card product-card shadow border-0 rounded-4">
+{% if product.image %}
+<img src="{{ product.image.url }}" class="card-img-top"
+     style="height:180px;object-fit:cover;">
+{% endif %}
+<div class="card-body text-center">
+<h5>{{ product.name }}</h5>
+<p class="fw-bold text-success">${{ product.price }}</p>
+<a href="/cart/add/{{ product.id }}/"
+   class="btn btn-primary btn-sm">Add to Cart</a>
+</div>
+</div>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

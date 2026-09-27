@@ -1,0 +1,75 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block title %}Products | Retail Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+<h1>🛒 Our Products</h1>
+<p>Fresh groceries at unbeatable prices</p>
+</section>
+
+<div class="container py-5">
+
+<!-- Search Bar -->
+<form method="get" action="/products/" class="mb-4">
+<div class="input-group">
+<input type="text" name="q" value="{{ query }}"
+       class="form-control form-control-lg"
+       placeholder="Search products...">
+<button class="btn btn-dark">Search</button>
+</div>
+</form>
+
+<!-- Category Filter -->
+<div class="mb-4 text-center">
+<a href="/products/" class="btn btn-dark me-2">All</a>
+{% for category in categories %}
+<a href="/products/?category={{ category.id }}"
+   class="btn btn-outline-dark me-2">{{ category.name }}</a>
+{% endfor %}
+</div>
+
+<!-- Products Grid -->
+<div class="row g-4">
+{% for product in products %}
+<div class="col-md-4">
+<div class="card product-card shadow border-0 rounded-4 h-100">
+{% if product.image %}
+<img src="{{ product.image.url }}" class="card-img-top rounded-top-4 product-image">
+{% else %}
+<div class="product-image-placeholder rounded-top-4 d-flex align-items-center justify-content-center">
+  <span class="text-muted">No Image</span>
+</div>
+{% endif %}
+<div class="card-body text-center p-4">
+<h4 class="product-name">{{ product.name }}</h4>
+{% if product.category %}
+<p class="product-category mb-2">{{ product.category.name }}</p>
+{% endif %}
+<p class="text-muted">{{ product.description }}</p>
+<p class="fw-bold fs-4 text-success mb-2">${{ product.price }}</p>
+{% if product.stock > 5 %}
+<span class="badge stock-badge mb-3">In Stock: {{ product.stock }}</span>
+{% elif product.stock > 0 %}
+<span class="badge stock-badge low-stock mb-3">Only {{ product.stock }} left</span>
+{% else %}
+<span class="badge stock-badge low-stock mb-3">Out of Stock</span>
+{% endif %}
+{% if product.stock > 0 %}
+<a href="/cart/add/{{ product.id }}/"
+   class="btn btn-success w-100 add-to-cart-btn">Add To Cart</a>
+{% else %}
+<button class="btn btn-secondary w-100" disabled>Out of Stock</button>
+{% endif %}
+</div>
+</div>
+</div>
+{% empty %}
+<div class="col-12 text-center py-5">
+<h4 class="text-muted">No products found!</h4>
+<a href="/products/" class="btn btn-primary mt-3">View All</a>
+</div>
+{% endfor %}
+</div>
+</div>
+{% endblock %}

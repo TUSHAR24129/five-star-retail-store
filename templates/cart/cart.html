@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block title %}Cart | Retail Shop{% endblock %}
+
+{% block content %}
+<section class="page-hero">
+<h1>🛒 My Cart</h1>
+<p>Review your items before checkout</p>
+</section>
+
+<div class="container py-5">
+{% if items %}
+<div class="card shadow p-4">
+<table class="table table-bordered align-middle">
+<thead class="table-dark">
+<tr><th>Product</th><th>Price</th><th>Quantity</th><th>Subtotal</th><th>Action</th></tr>
+</thead>
+<tbody>
+{% for item in items %}
+<tr>
+<td>{{ item.product.name }}</td>
+<td>${{ item.product.price }}</td>
+<td>
+<form method="post" action="/cart/update/{{ item.id }}/"
+      class="d-flex gap-2">
+{% csrf_token %}
+<input type="number" name="quantity" value="{{ item.quantity }}"
+       min="0" class="form-control" style="width:80px;">
+<button class="btn btn-sm btn-outline-primary">Update</button>
+</form>
+</td>
+<td>${{ item.subtotal }}</td>
+<td>
+<a href="/cart/remove/{{ item.id }}/"
+   class="btn btn-sm btn-danger">Remove</a>
+</td>
+</tr>
+{% endfor %}
+</tbody>
+</table>
+<div class="d-flex justify-content-between align-items-center mt-4">
+<h4>Total: <span class="text-success">${{ cart.total }}</span></h4>
+<a href="/orders/checkout/" class="btn btn-success btn-lg">
+Checkout →
+</a>
+</div>
+</div>
+{% else %}
+<div class="text-center py-5">
+<h4 class="text-muted">Your cart is empty!</h4>
+<a href="/products/" class="btn btn-primary mt-3">Shop Now</a>
+</div>
+{% endif %}
+</div>
+{% endblock %}
