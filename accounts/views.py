@@ -29,4 +29,4 @@ def register_view(request):
             User.objects.create_user(username=username, email=email, password=password)
             messages.success(request, 'Account created! Please login.')
             return redirect('login')
-    return render(request, 'accounts/register.html')
+    return render(request, 'accounts/register.html')# Auth
